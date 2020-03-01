@@ -1,0 +1,16 @@
+{
+  "name": "ovh-reboot-servers",
+  "version": "1.0.0",
+  "description": "Reboots OVH server",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CR",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
+    "ovh": "^2.0.3"
+  }
+}
