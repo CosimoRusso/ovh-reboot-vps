@@ -1,4 +1,4 @@
-# OVH reboot server
+# OVH reboot VPS
 reboots all servers in your OVH account on sunday morning at 4am.
 
 ## prerequisites
