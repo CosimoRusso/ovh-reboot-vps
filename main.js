@@ -1,4 +1,5 @@
-var ovh = require('ovh')({
+require("dotenv").config();
+const ovh = require('ovh')({
     appKey: process.env.OVH_APPLICATION_KEY,
     appSecret: process.env.OVH_SECRET_KEY,
     consumerKey: process.env.OVH_CONSUMER_KEY
