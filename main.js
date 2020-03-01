@@ -9,12 +9,12 @@ const fs = require("fs");
 const path = require("path");
 
 const cronSchedule = "0 4 * * 0"; //sunday at 4 am
-const logPath = path.join(__dirname, "logs.txt");
+const logPath = path.join(__dirname, "logs/logs.txt");
 
 if(!fs.existsSync(logPath)){
     fs.writeFileSync(logPath, "");
 }
-
+log("Hello");
 cron.schedule(cronSchedule, () => {
     run()
         .then(()=>log("DONE " + new Date().toLocaleString()))
