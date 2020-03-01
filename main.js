@@ -5,12 +5,20 @@ const ovh = require('ovh')({
     consumerKey: process.env.OVH_CONSUMER_KEY
 });
 const cron = require("node-cron");
+const fs = require("fs");
+const path = require("path");
+
 const cronSchedule = "0 4 * * 0"; //sunday at 4 am
+const logPath = path.join(__dirname, "logs.txt");
+
+if(!fs.existsSync(logPath)){
+    fs.writeFileSync(logPath, "");
+}
 
 cron.schedule(cronSchedule, () => {
     run()
-        .then(()=>console.log("DONE " + new Date().toLocaleString()))
-        .catch((e) => console.error(e));
+        .then(()=>log("DONE " + new Date().toLocaleString()))
+        .catch(log);
 });
 
 async function run(){
@@ -21,6 +29,11 @@ async function run(){
     }
     const results = await Promise.allSettled(promises);
     for(let i =0; i<vpsList.length; i++){
-        console.log(vpsList[i] + ": " + results[i].status);
+        log(vpsList[i] + ": " + results[i].status);
     }
+}
+
+function log(text){
+    const content = new Date().toISOString() + " " + text + "\n";
+    fs.appendFileSync(logPath, content);
 }
