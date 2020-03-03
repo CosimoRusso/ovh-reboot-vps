@@ -19,16 +19,19 @@ const logPath = path.join(__dirname, "logs/logs.txt");
 if(!fs.existsSync(logPath)){
     fs.writeFileSync(logPath, "");
 }
+
+if(getLastLogLine() != "Hello"){
+    sendMessage("Server Started");
+}
 log("Hello");
-sendMessage("Server started");
 if(!telegram){
-    log("Bot not available");
+    log("Telegram not available");
 }
 
 cron.schedule(cronSchedule, () => {
     run()
-        .then(()=>log("DONE"))
-        .catch(log);
+        .then(()=>log("All servers done"))
+        .catch(e => log(e.stack));
 });
 
 async function run(){
@@ -51,9 +54,14 @@ function log(text){
 
 function sendMessage(text){
     if(telegram){
-        const content = new Date().toISOString() + " " + text;
-        telegram.sendMessage(chatId, content)
+        telegram.sendMessage(chatId, text)
             .then(log("Telegram, message sent"))
-            .catch(e => log("Unable to send message: " + text));
+            .catch(e => log("Unable to send message: " + text + "\n" + e));
     }
+}
+
+function getLastLogLine(){
+    const text = fs.readFileSync(logPath, "utf-8");
+    if(!text) return null;
+    return text.split("\n").reverse()[0].substring(25);
 }
