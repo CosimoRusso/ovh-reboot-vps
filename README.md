@@ -20,7 +20,7 @@ https://eu.api.ovh.com/1.0/auth/credential  -d '{
     "redirection":"https://www.google.com/"
 }'
 ```
-This will open a page in your browser. Login and remember to set the validity of the key to *unlimited*. If all went well, you have been redirected to google.
+This will print on your termina a JSON object with the consumer key (save it) and a link. Click the link that will open a page in your browser. Login and remember to set the validity of the key to *unlimited*. If all went well, you have been redirected to google.
 
 ## Installation
 1. Fill in the `.env` file with your OVH keys. You can copy from `.env.sample` the format.
