@@ -61,7 +61,7 @@ function sendMessage(text){
 }
 
 function getLastLogLine(){
-    const text = fs.readFileSync(logPath, "utf-8");
-    if(!text) return null;
-    return text.split("\n").filter(l => l!="").reverse()[0].substring(25);
+    const text = fs.readFileSync(logPath, "utf-8").split("\n").filter(l => l!="");
+    if(text.length === 0) return null;
+    return text.reverse()[0].substring(25);
 }
