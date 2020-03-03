@@ -55,7 +55,7 @@ function log(text){
 function sendMessage(text){
     if(telegram){
         telegram.sendMessage(chatId, text)
-            .then(log("Telegram, message sent"))
+            .then()
             .catch(e => log("Unable to send message: " + text + "\n" + e));
     }
 }
@@ -63,5 +63,5 @@ function sendMessage(text){
 function getLastLogLine(){
     const text = fs.readFileSync(logPath, "utf-8");
     if(!text) return null;
-    return text.split("\n").reverse()[0].substring(25);
+    return text.split("\n").filter(l => l!="").reverse()[0].substring(25);
 }
